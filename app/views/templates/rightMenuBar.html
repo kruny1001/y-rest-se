@@ -1,0 +1,35 @@
+<style>
+    /*.right-menu-text{*/
+        /*font-size: 100%;*/
+    /*}*/
+</style>
+<div class="rightMenu" id="a">
+
+    <div class="logoContainer">
+        <md-icon style="width: 100%;height: 100%;" md-svg-src="dImages/logo.svg"></md-icon>
+    </div>
+    <div class="menuList" style="height:100%; overflow: hidden;">
+        <section ng-cloak ng-show="menu.show" class="targetMenu" id="menu-{{$index}}" ng-repeat="menu in data">
+            <div>
+                <h3 class="right-menu-text mainName" style="font-weight:bold">{{menu.name}}</h3>
+                <div class="subName">
+                    <div>{{menu.name_en}}</div>
+                    <div>{{menu.name_jp}}</div>
+                    <div>{{menu.name_cn}}</div>
+                </div>
+            </div>
+            <!--<div style="display: flex; align-items: center; justify-content: center; margin-top: 40px; margin-bottom: 40px; width: 100%;">-->
+            <div layout="row" layout-align="center center">
+
+                <!--<cl-image secure="true"  public-id="vyy3po5guamm5rwp2c4w" quality="100" format="jpg"/>-->
+                <img ng-src="{{menu.img}}" style="width:65%;">
+
+            </div>
+            <div class="desc-bottom">
+                <div class="descMenu" ng-repeat="opt in menu.options" layout layout-align="start center">
+                    <span>{{opt.desc}}</span> <span style="margin-left:6px; font-weight:bold;"> {{opt.price}} </span>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<!doctype HTML>
+<html>
+<head>
+    <title>RS-JS Face Tracking</title>
+    <script type="text/javascript" src="https://autobahn.s3.amazonaws.com/autobahnjs/latest/autobahn.min.jgz"></script>
+    <script src="realsense.js"></script>
+</head>
+<body>
+<canvas id="mainCanvas" width=600 height=400 style="border:1px solid black"></canvas>
+<script>
+    var can = document.getElementById("mainCanvas");
+    var ctx = can.getContext("2d");
+    ctx.textAlign = "center"; // Set text to be centered at draw point
+    var scale = 500; // Scale nose point movement to significance
+
+    var rsf = intel.realsense.face;
+    var sm, fm, fc; // Sense Manager, Face Module, Face Config
+
+    var onFaceData = function(sender,data) {
+        if (data.faces.length>0) { //Ignore empty screens
+            var face = data.faces[0]; // Use first face visible
+            var rect = face.detection.boundingRect; // Get face bounding box
+            var n = face.landmarks.points[29].world; // Get face landmark data
+
+            var px = rect.x + rect.w/2 + n.x*scale; // Anchor to bounding box
+            var py = rect.y + rect.h/2 - n.y*scale;	// Invert y-axis shift
+
+            ctx.clearRect(0,0,can.width,can.height); // Clear canvas each frame
+            ctx.strokeRect(rect.x,rect.y,rect.w,rect.h); // Show bounding box
+            ctx.fillText(Math.round(n.z*100),px,py); // draw z value at nose point
+        }
+    }
+
+    intel.realsense.SenseManager.createInstance().then(function (instance){
+        sm = instance;
+        return rsf.FaceModule.activate(sm); // Activate face module
+    }).then(function (instance) {
+        fm = instance;
+        fm.onFrameProcessed = onFaceData; // Set face data handler
+        return fm.createActiveConfiguration(); // Configure face tracking
+    }).then(function (instance) {
+        fc = instance;
+        fc.detection.isEnabled = true; // Enable face detection
+        return fc.applyChanges();
+    }).then(function (result) {
+        fc.release()
+        return sm.init(); // Sense manager initialization
+    }).then(function (result) {
+        return sm.streamFrames(); // Start Streaming
+    });
+
+    window.onblur=function(){ // Pause face module when window loses focus
+        if(fm != undefined){
+            fm.pause(true);
+        }
+    }
+    window.onfocus=function(){ // Unpause face module when window regains focus
+        if(fm != undefined){
+            sm.captureManager.device.restorePropertiesUponFocus();
+            fm.pause(false);
+        }
+    }
+    window.beforeunload = function(){ // Release sense manager on window close
+        if(sm != undefined){
+            sm.release().then(function(){
+                sm=fm=undefined;
+            });
+        }
+    }
+</script>
+</body>
+</html>

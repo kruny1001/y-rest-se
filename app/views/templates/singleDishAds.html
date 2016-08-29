@@ -1,0 +1,25 @@
+<div class="mainMenu" style="background: rgba(0, 0, 0, 0.7);" id="whole1">
+    <h3> 식사류 </h3>
+    <hr/>
+    <md-grid-list
+            md-cols="5"
+            md-row-height="5:3"
+            md-gutter="12px" md-gutter-gt-sm="8px" >
+        <md-grid-tile  md-rowspan="2" md-colspan="1" ng-repeat="sub in data track by $index">
+            <div layout="column">
+                <img ng-src="{{sub.img}}" style="width:70%;">
+                <h3 class="mainDishName" style="margin-left:0px; font-weight:bold">{{sub.name}} {{sub.options[0].price}}</h3>
+                <div class="mainDishSubName">{{sub.name_en}}</div>
+                <div class="mainDishSubName">{{sub.name_jp}}</div>
+                <div class="mainDishSubName">{{sub.name_cn}}</div>
+            </div>
+
+            <!--<md-grid-tile-footer style="    height: 83px;">-->
+                <!--<h3 class="md-title" style="margin-left:0px; font-weight:bold">{{sub.name}} {{sub.options[0].price}}</h3>-->
+                <!--<div class="md-title">{{sub.name_en}}</div>-->
+                <!--<div class="md-title">{{sub.name_jp}}</div>-->
+                <!--<div class="md-title">{{sub.name_cn}}</div>-->
+            <!--</md-grid-tile-footer>-->
+        </md-grid-tile>
+    </md-grid-list>
+</div>

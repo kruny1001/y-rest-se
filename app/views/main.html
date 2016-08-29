@@ -1,0 +1,48 @@
+<!-- Video -->
+<section style="position: absolute; width:100%; height:100%; overflow: hidden;">
+  <!--<md-content style="position:absolute; width:100%; height:410px; overflow: hidden; z-index: 99; background: transparent;"></md-content>-->
+  <md-content style="position: absolute; width:100%; height:100%; overflow: hidden; overflow: hidden">
+    <videogular
+            id="bgvid"
+            style="height:100%; "
+            vg-player-ready="onPlayerReadyVideoRoot($API)"
+            vg-complete="onCompleteVideoRoot()"
+            vg-youtube="rel=0;showinfo=0"
+            vg-theme="configVideo.theme">
+      <vg-media vg-src="configVideo.sources"
+                vg-tracks="configVideo.tracks">
+      </vg-media>
+      <vg-buffering></vg-buffering>
+    </videogular>
+  </md-content>
+</section>
+
+<!--<video autoplay muted id="bgvid" loop>-->
+  <!--&lt;!&ndash;<source src = "https://firebasestorage.googleapis.com/v0/b/y-rest-se.appspot.com/o/VID_20160816_180937552.mp4?alt=media&token=b45f4d35-14ea-46eb-bf50-a633c89cbe21" type="video/mp4">&ndash;&gt;-->
+  <!--<source src="https://firebasestorage.googleapis.com/v0/b/y-rest-se.appspot.com/o/vid2.mp4?alt=media&token=50f8b1dd-a7c1-47c0-86ee-358aee27a4fa" type="video/mp4">-->
+<!--</video>-->
+
+<main-dish-ads data="meats"></main-dish-ads>
+<single-dish-ads data="singles"></single-dish-ads>
+<right-menu-bar data="menus"></right-menu-bar>
+
+<!--<digital-clock style="padding: 8px;"></digital-clock>-->
+<!--<div style="background-color: black; position:absolute; color:white; bottom:60px;">-->
+  <!--<div> Video Status </div>-->
+<!--</div>-->
+
+<style>
+  .adminTool{
+    opacity: 0;
+  }
+  .adminTool:hover{
+    opacity: 1;
+  }
+</style>
+<div class="adminTool" ng-if="true" style="background-color: black; position:absolute; bottom:0px;">
+  <md-button style="color:white;" ng-click="animation1()"> 오른쪽 메뉴 애니 </md-button>
+  <md-button style="color:white;" ng-click="animation2()"> 전체화면 메뉴 1 </md-button>
+  <md-button style="color:white;" ng-click="animation3()"> 전체화면 메뉴 2 </md-button>
+  <md-button style="color:white;" ng-click="goTo('admin')"> 관리페이지 </md-button>
+  <md-button style="color:white;" ng-click="reload()"> Reload </md-button>
+</div>

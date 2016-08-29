@@ -1,0 +1,203 @@
+<md-content>
+    <md-tabs md-dynamic-height="true">
+        <md-tab md-on-select="targetMenu=null">
+            <md-tab-label> 구이류(전체페이지) </md-tab-label>
+            <md-tab-body>
+                <div ng-repeat="meat in meats" ng-click="setTargetMenu(meat)">
+                    <img style="width:35px;" ng-src="{{meat.img}}">
+                    {{meat.name}} {{meat.options[0].price}}
+                </div>
+
+                <md-content ng-if="targetMenu !== null" style="height:100%;">
+                    <section layout="row" layout-align="center stretched" layout-padding>
+                        <div flex="50" >
+                            <div class="md-title"> 기본정보 </div>
+                            <div> 사진 (Image) </div>
+                            <input style="width:100%;" type="text" ng-model="targetMenu.img">
+                            <div> 이름 한국어 (Name KR)</div>
+                            <input style="width:100%;" type="text" ng-model="targetMenu.name">
+                            <div> 이름 영어 (Name EN)</div>
+                            <input style="width:100%;" type="text" ng-model="targetMenu.name_en">
+                            <div> 이름 중국어 (Name CN)</div>
+                            <input style="width:100%;" type="text" ng-model="targetMenu.name_cn">
+                            <div> 이름 일본어 (Name JP)</div>
+                            <input style="width:100%;" type="text" ng-model="targetMenu.name_jp">
+                            <section>
+                                <div class="md-title"> 옵션 </div>
+                                <div ng-repeat="opt in targetMenu.options">
+                                    <div> 옵션 설명 </div>
+                                    <input style="width:100%;" type="text" ng-model="opt.desc">
+                                    <div> 가격 </div>
+                                    <input style="width:100%;" type="text" ng-model="opt.price">
+                                </div>
+                            </section>
+                        </div>
+                        <!-- Preview Target -->
+                        <div flex="50" style="background: rgba(0, 0, 0, 0.7);">
+                            <md-grid-list
+                                    md-cols="1"
+                                    md-row-height="5:1"
+                                    md-gutter="12px" md-gutter-gt-sm="8px" >
+                                <md-grid-tile  md-rowspan="1" md-colspan="1">
+                                    <img ng-src="{{targetMenu.img}}" style="width:60%; max-width:200px;">
+                                </md-grid-tile>
+                            </md-grid-list>
+                            <div layout="row" style="margin-top: 35px;">
+                                <section style="padding:8px; color:white;" flex>
+                                    <h3 class="md-title" style="margin-left:0px; font-weight:bold">{{targetMenu.name}} {{targetMenu.opions[0].price}}</h3>
+                                    <div>{{targetMenu.name_en}}</div>
+                                    <div>{{targetMenu.name_jp}}</div>
+                                    <div>{{targetMenu.name_cn}}</div>
+                                    <hr/>
+                                    <section style="">
+                                        <div class="md-body-1" ng-repeat="opt in targetMenu.options" layout layout-align="start center">
+                                            <span flex="70">{{opt.desc}}</span>
+                                            <span flex="30" class="md-title" style="margin-left:6px; font-weight:bold;"> {{opt.price}} </span>
+                                        </div>
+                                    </section>
+                                </section>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <md-button ng-click="updateMenu(targetMenu)">수정하기</md-button>
+                    </section>
+                </md-content>
+            </md-tab-body>
+        </md-tab>
+
+        <md-tab md-on-select="targetMenu=null">
+            <md-tab-label> 식사류(전체페이지) </md-tab-label>
+            <md-tab-body>
+                <div ng-repeat="single in singles" ng-click="setTargetMenu(single)">
+                    <img style="width:35px;" ng-src="{{single.img}}">
+                    {{single.name}} {{single.options[0].price}}
+                </div>
+                <md-content ng-if="targetMenu !== null" style="height:100%;">
+                    <section layout="row" layout-align="center stretched" layout-padding>
+                        <div flex="50" >
+                            <div class="md-title"> 기본정보 </div>
+                            <div> 사진 (Image) </div>
+                            <input style="width:100%;" type="text" ng-model="targetMenu.img">
+                            <div> 이름 한국어 (Name KR)</div>
+                            <input style="width:100%;" type="text" ng-model="targetMenu.name">
+                            <div> 이름 영어 (Name EN)</div>
+                            <input style="width:100%;" type="text" ng-model="targetMenu.name_en">
+                            <div> 이름 중국어 (Name CN)</div>
+                            <input style="width:100%;" type="text" ng-model="targetMenu.name_cn">
+                            <div> 이름 일본어 (Name JP)</div>
+                            <input style="width:100%;" type="text" ng-model="targetMenu.name_jp">
+                            <section>
+                                <div class="md-title"> 옵션 </div>
+                                <div ng-repeat="opt in targetMenu.options">
+                                    <div> 옵션 설명 </div>
+                                    <input style="width:100%;" type="text" ng-model="opt.desc">
+                                    <div> 가격 </div>
+                                    <input style="width:100%;" type="text" ng-model="opt.price">
+                                </div>
+                            </section>
+                        </div>
+                        <!-- Preview Target -->
+                        <div flex="50" style="background: rgba(0, 0, 0, 0.7);">
+                            <md-grid-list
+                                    md-cols="1"
+                                    md-row-height="5:1"
+                                    md-gutter="12px" md-gutter-gt-sm="8px" >
+                                <md-grid-tile  md-rowspan="1" md-colspan="1">
+                                    <img ng-src="{{targetMenu.img}}" style="width:60%; max-width:200px;">
+                                </md-grid-tile>
+                            </md-grid-list>
+                            <div layout="row" style="margin-top: 35px;">
+                                <section style="padding:8px; color:white;" flex>
+                                    <h3 class="md-title" style="margin-left:0px; font-weight:bold">{{targetMenu.name}} {{targetMenu.opions[0].price}}</h3>
+                                    <div>{{targetMenu.name_en}}</div>
+                                    <div>{{targetMenu.name_jp}}</div>
+                                    <div>{{targetMenu.name_cn}}</div>
+                                    <hr/>
+                                    <section style="">
+                                        <div class="md-body-1" ng-repeat="opt in targetMenu.options" layout layout-align="start center">
+                                            <span flex="70">{{opt.desc}}</span>
+                                            <span flex="30" class="md-title" style="margin-left:6px; font-weight:bold;"> {{opt.price}} </span>
+                                        </div>
+                                    </section>
+                                </section>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <md-button ng-click="updateMenu(targetMenu)">수정하기</md-button>
+                    </section>
+                </md-content>
+            </md-tab-body>
+        </md-tab>
+
+        <md-tab md-on-select="targetMenu=null">
+            <md-tab-label> 영상 </md-tab-label>
+            <md-tab-body>
+                <md-button ng-click="addVid()">추가하기</md-button>
+                <div ng-if="newVidTool">
+                    <div>추가 인터페이스</div>
+                    <md-input-container>
+                        <label>유투브 주소</label>
+                        <input ng-model="newVid">
+                    </md-input-container>
+                    <md-button class="md-raised md-warn" ng-click="addNewVid(newVid)"> 추가하기 </md-button>
+                </div>
+
+                <div layout="row">
+                    <section flex="50">
+                        <div ng-repeat="vid in videos" style="width:100%;">
+                            <md-input-container flex style="width:100%;">
+                                <label>유투브 주소</label>
+                                <input ng-model="vid.$value">
+                            </md-input-container>
+                            <div><md-button ng-click="videos.$save(vid)">수정하기</md-button>
+                                <md-button ng-click="videos.$remove(vid)">삭제하기</md-button></div>
+                        </div>
+                    </section>
+                    <section flex="50">
+                        <videogular vg-player-ready="onPlayerReady" vg-theme="config.theme.url" vg-autoplay="config.autoPlay">
+                            <vg-video vg-src="config.sources" vg-youtube="rel=1;showinfo=1"></vg-video>
+
+                            <vg-controls vg-autohide="config.autoHide" vg-autohide-time="config.autoHideTime">
+                                <vg-play-pause-button></vg-play-pause-button>
+                                <vg-timedisplay>{{ currentTime | date:'mm:ss' }}</vg-timedisplay>
+                                <vg-scrubBar>
+                                    <vg-scrubbarcurrenttime></vg-scrubbarcurrenttime>
+                                </vg-scrubBar>
+                                <vg-timedisplay>{{ timeLeft | date:'mm:ss' }}</vg-timedisplay>
+                                <vg-volume>
+                                    <vg-mutebutton></vg-mutebutton>
+                                    <vg-volumebar></vg-volumebar>
+                                </vg-volume>
+                                <vg-fullscreenButton></vg-fullscreenButton>
+                            </vg-controls>
+
+                            <vg-poster-image vg-url='config.plugins.poster.url'></vg-poster-image>
+                            <vg-buffering></vg-buffering>
+                            <vg-overlay-play vg-play-icon="config.theme.playIcon"></vg-overlay-play>
+
+                            <vg-poster-image vg-url='config.plugins.poster.url'></vg-poster-image>
+                            <vg-buffering></vg-buffering>
+                            <vg-overlay-play vg-play-icon="config.theme.playIcon"></vg-overlay-play>
+                        </videogular>
+                    </section>
+                </div>
+
+
+            </md-tab-body>
+        </md-tab>
+    </md-tabs>
+</md-content>
+
+<style>
+    .adminTool{
+        opacity: 0;
+    }
+    .adminTool:hover{
+        opacity: 1;
+    }
+</style>
+<div class="adminTool" ng-if="true" style="background-color: black; position:absolute; bottom:0px;">
+    <md-button style="color:white;" ng-click="goTo('')"> 메인페이지 </md-button>
+</div>
